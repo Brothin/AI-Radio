@@ -36,9 +36,8 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     setupAlan();
     fetchRadios();
-
     _audioPlayer.onPlayerStateChanged.listen((event) {
-      if (event == AudioPlayerState.PLAYING) {
+      if (event == PlayerState.playing) {
         _isPlaying = true;
       } else {
         _isPlaying = false;
@@ -48,7 +47,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   setupAlan() {
-    AlanVoice.addButton("<Enter your key here>",
+    AlanVoice.addButton(
+        "0d658b5b7574abb49a685934e01772ba2e956eca572e1d8b807a3e2338fdd0dc/stage",
         buttonAlign: AlanVoice.BUTTON_ALIGN_RIGHT);
     AlanVoice.callbacks.add((command) => _handleCommand(command.data));
   }
@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   _playMusic(String url) {
-    _audioPlayer.play(url);
+    _audioPlayer.play(UrlSource(url));
     _selectedRadio = radios.firstWhere((element) => element.url == url);
     print(_selectedRadio.name);
     setState(() {});
@@ -196,9 +196,9 @@ class _HomePageState extends State<HomePage> {
           radios != null
               ? VxSwiper.builder(
                   itemCount: radios.length,
-                  aspectRatio: context.mdWindowSize == MobileWindowSize.xsmall
+                  aspectRatio: context.mdWindowSize == MobileDeviceSize.small
                       ? 1.0
-                      : context.mdWindowSize == MobileWindowSize.medium
+                      : context.mdWindowSize == MobileDeviceSize.medium
                           ? 2.0
                           : 3.0,
                   enlargeCenterPage: true,

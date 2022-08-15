@@ -5,12 +5,12 @@
 import FlutterMacOS
 import Foundation
 
-import audioplayers
+import audioplayers_darwin
 import package_info
 import path_provider_macos
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
-  AudioplayersPlugin.register(with: registry.registrar(forPlugin: "AudioplayersPlugin"))
+  AudioplayersDarwinPlugin.register(with: registry.registrar(forPlugin: "AudioplayersDarwinPlugin"))
   FLTPackageInfoPlugin.register(with: registry.registrar(forPlugin: "FLTPackageInfoPlugin"))
   PathProviderPlugin.register(with: registry.registrar(forPlugin: "PathProviderPlugin"))
 }
