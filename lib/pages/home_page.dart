@@ -36,6 +36,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     setupAlan();
     fetchRadios();
+
     _audioPlayer.onPlayerStateChanged.listen((event) {
       if (event == PlayerState.playing) {
         _isPlaying = true;
@@ -47,8 +48,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   setupAlan() {
-    AlanVoice.addButton(
-        "0d658b5b7574abb49a685934e01772ba2e956eca572e1d8b807a3e2338fdd0dc/stage",
+    AlanVoice.addButton("<Enter your key here>",
         buttonAlign: AlanVoice.BUTTON_ALIGN_RIGHT);
     AlanVoice.callbacks.add((command) => _handleCommand(command.data));
   }
@@ -174,7 +174,7 @@ class _HomePageState extends State<HomePage> {
               centerTitle: true,
             ).h(100.0).p16(),
             "Start with - Hey Alan 👇".text.italic.semiBold.white.make(),
-            10.heightBox,
+            20.heightBox,
             VxSwiper.builder(
               itemCount: sugg.length,
               height: 50.0,
@@ -190,17 +190,13 @@ class _HomePageState extends State<HomePage> {
                   backgroundColor: Vx.randomColor,
                 );
               },
-            )
+            ),
           ].vStack(alignment: MainAxisAlignment.start),
           30.heightBox,
           radios != null
               ? VxSwiper.builder(
                   itemCount: radios.length,
-                  aspectRatio: context.mdWindowSize == MobileDeviceSize.small
-                      ? 1.0
-                      : context.mdWindowSize == MobileDeviceSize.medium
-                          ? 2.0
-                          : 3.0,
+                  aspectRatio: 1.2,
                   enlargeCenterPage: true,
                   onPageChanged: (index) {
                     _selectedRadio = radios[index];
